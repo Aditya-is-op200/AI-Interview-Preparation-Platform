@@ -2,7 +2,7 @@ const userModel = require("../models/user.model.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const tokenBlackListModel = require("../models/blacklist.model")
+const tokenBlackListModel = require("../models/blacklist.model.js")
 
 /**
  * description: Register a new user and expects username, email and password in the body
