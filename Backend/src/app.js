@@ -14,8 +14,9 @@ app.use(cors({
 //credentials need to be true for tokens to be accessed by the server 
 /* require all the routes here */
 const authRouter = require("./routes/auth.routes.js");
+const interviewRouter = require("./routes/interview.routes.js");
 
 /* Using all the routes here  */
 app.use("/api/auth", authRouter);
-
+app.use("/api/interview", interviewRouter);
 module.exports = app;
