@@ -332,7 +332,8 @@ Open `http://localhost:5173` in your browser.
 **Aditya Singh**
 
 - **GitHub**: [@Aditya-is-op200](https://github.com/Aditya-is-op200)
-- **LinkedIn**: [Aditya Singh](https://linkedin.com/in/adityasingh)
+- **LinkedIn**: [Aditya Singh](https://www.linkedin.com/in/aditya-singh-2512662ba/)
+- **LeetCode**: [@Aditya_Singh_Lko](https://leetcode.com/u/Aditya_Singh_Lko/)
 - **Email**: [adityaanandsingh2004codes@gmail.com](mailto:adityaanandsingh2004codes@gmail.com)
 
 ---
