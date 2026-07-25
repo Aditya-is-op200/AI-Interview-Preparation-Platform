@@ -14,9 +14,14 @@ export const useAuth = () => {
         setLoading(true)
         try {
             const data = await login({ email, password })
-            setUser(data.user)
+            if (data?.user) {
+                setUser(data.user)
+            } else {
+                setUser(null)
+            }
+            return data
         } catch (err) {
-
+            setUser(null)
         } finally {
             setLoading(false)
         }
@@ -26,9 +31,14 @@ export const useAuth = () => {
         setLoading(true)
         try {
             const data = await register({ username, email, password })
-            setUser(data.user)
+            if (data?.user) {
+                setUser(data.user)
+            } else {
+                setUser(null)
+            }
+            return data
         } catch (err) {
-
+            setUser(null)
         } finally {
             setLoading(false)
         }
@@ -37,28 +47,28 @@ export const useAuth = () => {
     const handleLogout = async () => {
         setLoading(true)
         try {
-            const data = await logout()
+            await logout()
             setUser(null)
         } catch (err) {
-
+            setUser(null)
         } finally {
             setLoading(false)
         }
     }
-    //Fixing the Page refresh problem using useEffect :
-    /*
-    After loading the app if the user is logged in then show the home page else login page
-    without it showing loading page .
-    The getMe() is used to work on tokens to get the logged in user details on refresh , 
-    If no token is found then show the login page otherwise show the home page
-    */
-     useEffect(() => {
+
+    useEffect(() => {
 
         const getAndSetUser = async () => {
             try {
                 const data = await getMe()
-                setUser(data.user)
-            } catch (err) { } finally {
+                if (data?.user) {
+                    setUser(data.user)
+                } else {
+                    setUser(null)
+                }
+            } catch (err) {
+                setUser(null)
+            } finally {
                 setLoading(false)
             }
         }
