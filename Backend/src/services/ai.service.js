@@ -17,8 +17,7 @@
 // module.exports = invokeGeminiAi
 
 const { GoogleGenAI } = require("@google/genai")
-const { z } = require("zod")
-const { zodToJsonSchema } = require("zod-to-json-schema")
+const { z, toJSONSchema } = require("zod")
 const puppeteer = require("puppeteer")
 
 const ai = new GoogleGenAI({
@@ -60,11 +59,11 @@ async function generateInterviewReport({ resume, selfDescription, jobDescription
 `
 
     const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-flash-latest",
         contents: prompt,
         config: {
             responseMimeType: "application/json",
-            responseSchema: zodToJsonSchema(interviewReportSchema),
+            responseSchema: toJSONSchema(interviewReportSchema),
         }
     })
 
@@ -114,11 +113,11 @@ async function generateResumePdf({ resume, selfDescription, jobDescription }) {
                     `
 
     const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-flash-latest",
         contents: prompt,
         config: {
             responseMimeType: "application/json",
-            responseSchema: zodToJsonSchema(resumePdfSchema),
+            responseSchema: toJSONSchema(resumePdfSchema),
         }
     })
 
