@@ -1,4 +1,4 @@
-import { getAllInterviewReports, generateInterviewReport, getInterviewReportById, generateResumePdf } from "../services/interview.api"
+import { getAllInterviewReports, generateInterviewReport, getInterviewReportById, generateResumePdf, generateInterviewXRay } from "../services/interview.api"
 import { useContext } from "react"
 import { InterviewContext } from "../interview.context"
 
@@ -74,6 +74,17 @@ export const useInterview = () => {
         }
     }
 
-    return { loading, report, reports, generateReport, getReportById, getReports, getResumePdf }
+    const generateXRay = async (interviewReportId) => {
+        try {
+            const response = await generateInterviewXRay(interviewReportId)
+            setReport(response.interviewReport)
+            return response.interviewReport
+        } catch (error) {
+            console.log(error)
+            return null
+        }
+    }
+
+    return { loading, report, reports, generateReport, getReportById, getReports, getResumePdf, generateXRay }
 
 }

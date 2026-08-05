@@ -38,5 +38,13 @@ interviewRouter.get("/", authMiddleware.authUser, interviewController.getAllInte
 interviewRouter.post("/resume/pdf/:interviewReportId", authMiddleware.authUser, interviewController.generateResumePdfController)
 
 
+/**
+ * @route POST /api/interview/:interviewReportId/xray
+ * @description generate Interview X-Ray analysis for an existing report.
+ * @access private
+ */
+interviewRouter.post("/:interviewReportId/xray", authMiddleware.authUser, interviewController.generateInterviewXRayController)
+
+
 
 module.exports = interviewRouter

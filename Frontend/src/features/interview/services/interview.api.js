@@ -57,3 +57,13 @@ export const generateResumePdf = async ({ interviewReportId }) => {
 
     return response.data
 }
+
+
+/**
+ * @description Service to generate Interview X-Ray analysis for an existing report.
+ */
+export const generateInterviewXRay = async (interviewReportId) => {
+    const response = await api.post(`/api/interview/${interviewReportId}/xray`)
+
+    return response.data
+}

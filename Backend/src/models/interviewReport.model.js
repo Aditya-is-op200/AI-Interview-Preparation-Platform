@@ -97,6 +97,41 @@ const preparationPlanSchema = new mongoose.Schema({
     } ]
 })
 
+/* ── Interview X-Ray Schemas ── */
+const blindSpotSchema = new mongoose.Schema({
+    technology: { type: String, required: true },
+    resumeEvidence: { type: String, required: true },
+    whyItAttractsAttention: { type: String, required: true },
+    interviewerThought: { type: String, required: true },
+    expectedDepth: { type: String, enum: ["beginner", "intermediate", "advanced"], required: true },
+    blindSpotExplanation: { type: String, required: true },
+    followUpProbability: { type: Number, min: 1, max: 100, required: true },
+    likelyQuestions: [{ type: String }],
+    revisionChecklist: [{ type: String }],
+    whyItMatters: { type: String, required: true }
+}, { _id: false })
+
+const interviewXRaySchema = new mongoose.Schema({
+    blindSpots: [blindSpotSchema],
+    conversationDrivers: [{
+        section: { type: String },
+        probability: { type: Number }
+    }],
+    highestRiskDiscussion: {
+        topic: { type: String },
+        reason: { type: String },
+        estimatedFollowUps: { type: String }
+    },
+    safestDiscussion: {
+        topic: { type: String },
+        reason: { type: String }
+    },
+    surpriseQuestion: {
+        question: { type: String },
+        reason: { type: String }
+    }
+}, { _id: false })
+
 const interviewReportSchema = new mongoose.Schema({
     jobDescription: {
         type: String,
@@ -117,6 +152,7 @@ const interviewReportSchema = new mongoose.Schema({
     behavioralQuestions: [ behavioralQuestionSchema ],
     skillGaps: [ skillGapSchema ],
     preparationPlan: [ preparationPlanSchema ],
+    interviewXRay: interviewXRaySchema,
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "users"
