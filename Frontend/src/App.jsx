@@ -3,7 +3,7 @@ import { router } from "./app.routes";
 import { AuthProvider } from "./features/auth/auth.context.jsx";
 import { InterviewProvider } from "./features/interview/interview.context.jsx";
 function App() {
-  return ( 
+  return (
     <AuthProvider>
       <InterviewProvider>
         <RouterProvider router={router} />

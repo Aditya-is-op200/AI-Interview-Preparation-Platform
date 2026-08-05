@@ -7,36 +7,27 @@ const api = axios.create({
 })
 
 export async function register({ username, email, password }) {
-
     try {
         const response = await api.post('/api/auth/register', {
             username, email, password
         })
-
         return response.data
-
     } catch (err) {
         console.log(err)
-        return null
+        return err.response?.data || { message: "Registration failed. Please check your credentials." }
     }
-
 }
 
 export async function login({ email, password }) {
-
     try {
-
         const response = await api.post("/api/auth/login", {
             email, password
         })
-
         return response.data
-
     } catch (err) {
         console.log(err)
-        return null
+        return err.response?.data || { message: "Login failed. Please check your email and password." }
     }
-
 }
 
 export async function logout() {
