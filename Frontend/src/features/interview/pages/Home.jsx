@@ -3,21 +3,117 @@ import "../style/home.scss";
 import { useInterview } from '../hooks/useInterview.js';
 import { useNavigate } from 'react-router';
 import Navbar from '../../../components/Navbar';
-import { HomeSkeleton } from '../../../components/SkeletonLoader';
 import { SparklesIcon, BriefcaseIcon, UserIcon, UploadCloudIcon, AlertCircleIcon, ZapIcon, ArrowRightIcon } from '../../../components/Icons';
 
+/* ── AI Generation Steps config ── */
+const GEN_STEPS = [
+  { id: 1, label: 'Parsing job description' },
+  { id: 2, label: 'Analyzing your profile' },
+  { id: 3, label: 'Generating technical questions' },
+  { id: 4, label: 'Generating behavioral questions' },
+  { id: 5, label: 'Building preparation roadmap' },
+  { id: 6, label: 'Calculating match score' },
+];
+
+/* ── Inline SVGs for overlay (no external deps needed) ── */
+const BrainSvg = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
+    <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
+    <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/>
+  </svg>
+);
+
+const CheckSvg = () => (
+  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="20 6 9 17 4 12"/>
+  </svg>
+);
+
+/* ── AI Generating Overlay Component ── */
+const GeneratingOverlay = ({ currentStep }) => (
+  <div className="ai-generating-overlay">
+
+    {/* Orbital animation */}
+    <div className="ai-orb">
+      <div className="ai-orb__track ai-orb__track--outer" />
+      <div className="ai-orb__track ai-orb__track--inner" />
+      <div className="ai-orb__ring ai-orb__ring--1" />
+      <div className="ai-orb__ring ai-orb__ring--2" />
+      <div className="ai-orb__core">
+        <BrainSvg />
+      </div>
+    </div>
+
+    {/* Text body */}
+    <div className="ai-gen-body">
+      <h2 className="ai-gen-body__title">
+        Generating your strategy
+        <span className="dot-loader">
+          <span /><span /><span />
+        </span>
+      </h2>
+      <p className="ai-gen-body__subtitle">
+        Our AI is analyzing your profile against the job requirements. This takes about 20–40 seconds.
+      </p>
+    </div>
+
+    {/* Step tracker */}
+    <div className="ai-steps-list">
+      {GEN_STEPS.map((step) => {
+        const isDone = step.id < currentStep;
+        const isActive = step.id === currentStep;
+        return (
+          <div
+            key={step.id}
+            className={`ai-step-item ${isDone ? 'ai-step-item--done' : ''} ${isActive ? 'ai-step-item--active' : ''}`}
+          >
+            <div className="ai-step-item__check">
+              {isDone && <CheckSvg />}
+            </div>
+            <span>{step.label}</span>
+          </div>
+        );
+      })}
+    </div>
+
+  </div>
+);
+
+/* ── Main Component ── */
 const Home = () => {
   const { loading, generateReport, reports, getReports } = useInterview();
   const [jobDescription, setJobDescription] = useState("");
   const [selfDescription, setSelfDescription] = useState("");
   const [selectedFileName, setSelectedFileName] = useState("");
+  const [generating, setGenerating] = useState(false);
+  const [genStep, setGenStep] = useState(1);
   const resumeInputRef = useRef();
+  const stepTimerRef = useRef(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     getReports();
   }, []);
+
+  /* Advance the step indicator while generating */
+  const startStepTimer = () => {
+    setGenStep(1);
+    let step = 1;
+    stepTimerRef.current = setInterval(() => {
+      step += 1;
+      if (step <= GEN_STEPS.length) {
+        setGenStep(step);
+      } else {
+        clearInterval(stepTimerRef.current);
+      }
+    }, 5500); // advances every ~5.5s so it completes in ~33s
+  };
+
+  const stopStepTimer = () => {
+    if (stepTimerRef.current) clearInterval(stepTimerRef.current);
+  };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -28,24 +124,30 @@ const Home = () => {
 
   const handleGenerateReport = async () => {
     const resumeFile = resumeInputRef.current?.files?.[0];
-    const data = await generateReport({ jobDescription, selfDescription, resumeFile });
-    if (data?._id) {
-      navigate(`/interview/${data._id}`);
+    if (!jobDescription.trim()) return;
+
+    setGenerating(true);
+    startStepTimer();
+
+    try {
+      const data = await generateReport({ jobDescription, selfDescription, resumeFile });
+      stopStepTimer();
+      setGenerating(false);
+      if (data?._id) {
+        navigate(`/interview/${data._id}`);
+      }
+    } catch (err) {
+      stopStepTimer();
+      setGenerating(false);
     }
   };
-
-  if (loading) {
-    return (
-      <div className="home-page">
-        <Navbar />
-        <HomeSkeleton />
-      </div>
-    );
-  }
 
   return (
     <div className="home-page">
       <Navbar />
+
+      {/* AI Generation Overlay — rendered on top of everything */}
+      {generating && <GeneratingOverlay currentStep={genStep} />}
 
       <div className="home-container animate-entrance">
 
@@ -156,9 +258,24 @@ const Home = () => {
               <ZapIcon size={14} style={{ color: 'var(--amber-text)' }} />
               AI-Powered Strategy Generation &bull; ~30s execution time
             </span>
-            <button onClick={handleGenerateReport} className="btn-primary generate-btn">
-              <SparklesIcon size={16} />
-              <span>Generate My Interview Strategy</span>
+            <button
+              onClick={handleGenerateReport}
+              className="btn-primary generate-btn"
+              disabled={generating || !jobDescription.trim()}
+            >
+              {generating ? (
+                <>
+                  <span className="dot-loader" style={{ marginRight: 4 }}>
+                    <span /><span /><span />
+                  </span>
+                  <span>Generating…</span>
+                </>
+              ) : (
+                <>
+                  <SparklesIcon size={16} />
+                  <span>Generate My Interview Strategy</span>
+                </>
+              )}
             </button>
           </div>
         </div>
