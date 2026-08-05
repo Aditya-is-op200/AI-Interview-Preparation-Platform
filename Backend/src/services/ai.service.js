@@ -26,36 +26,41 @@ const ai = new GoogleGenAI({
 
 //This is a completely different schema from the ones in the model , used to create output , read docs for more.
 const interviewReportSchema = z.object({
-    matchScore: z.number().describe("A score between 0 and 100 indicating how well the candidate's profile matches the job describe"),
+    matchScore: z.number().describe("A score between 0 and 100 indicating how well the candidate's profile matches the job description"),
     technicalQuestions: z.array(z.object({
         question: z.string().describe("The technical question can be asked in the interview"),
         intention: z.string().describe("The intention of interviewer behind asking this question"),
         answer: z.string().describe("How to answer this question, what points to cover, what approach to take etc.")
-    })).describe("Technical questions that can be asked in the interview along with their intention and how to answer them"),
+    })).describe("An array of 8 to 10 comprehensive technical questions tailored specifically to the job role and tech stack, along with their intention and model answer"),
     behavioralQuestions: z.array(z.object({
-        question: z.string().describe("The technical question can be asked in the interview"),
+        question: z.string().describe("The behavioral question can be asked in the interview"),
         intention: z.string().describe("The intention of interviewer behind asking this question"),
-        answer: z.string().describe("How to answer this question, what points to cover, what approach to take etc.")
-    })).describe("Behavioral questions that can be asked in the interview along with their intention and how to answer them"),
+        answer: z.string().describe("How to answer this question using the STAR technique, what points to cover, what approach to take etc.")
+    })).describe("An array of 8 to 10 detailed behavioral and situational questions tailored to the candidate and role, along with their intention and model answer"),
     skillGaps: z.array(z.object({
         skill: z.string().describe("The skill which the candidate is lacking"),
         severity: z.enum([ "low", "medium", "high" ]).describe("The severity of this skill gap, i.e. how important is this skill for the job and how much it can impact the candidate's chances")
     })).describe("List of skill gaps in the candidate's profile along with their severity"),
     preparationPlan: z.array(z.object({
-        day: z.number().describe("The day number in the preparation plan, starting from 1"),
+        day: z.number().describe("The day number in the preparation plan, from Day 1 to Day 20"),
         focus: z.string().describe("The main focus of this day in the preparation plan, e.g. data structures, system design, mock interviews etc."),
         tasks: z.array(z.string()).describe("List of tasks to be done on this day to follow the preparation plan, e.g. read a specific book or article, solve a set of problems, watch a video etc.")
-    })).describe("A day-wise preparation plan for the candidate to follow in order to prepare for the interview effectively"),
+    })).describe("A comprehensive 20-day preparation plan (exactly 20 objects, Day 1 through Day 20) for the candidate to follow in order to prepare for the interview effectively"),
     title: z.string().describe("The title of the job for which the interview report is generated"),
 })
 
 async function generateInterviewReport({ resume, selfDescription, jobDescription }) {
 
 
-    const prompt = `Generate an interview report for a candidate with the following details:
+    const prompt = `Generate a detailed and comprehensive interview report for a candidate with the following details:
                         Resume: ${resume}
                         Self Description: ${selfDescription}
                         Job Description: ${jobDescription}
+
+IMPORTANT MANDATORY REQUIREMENTS:
+1. TECHNICAL QUESTIONS: Generate 8 to 10 detailed technical questions specific to the job requirements and tech stack.
+2. BEHAVIORAL QUESTIONS: Generate 8 to 10 behavioral questions using the STAR framework tailored to the company context and candidate experience.
+3. PREPARATION ROADMAP: Generate a full 20-day step-by-step preparation plan (Day 1 through Day 20) with specific, actionable tasks for each day.
 `
 
     const response = await ai.models.generateContent({
