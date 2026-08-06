@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🧠 Vyakta AI
+# Vyakta AI
 
 **AI-powered interview intelligence platform — from resume to interview-ready in minutes.**
 
