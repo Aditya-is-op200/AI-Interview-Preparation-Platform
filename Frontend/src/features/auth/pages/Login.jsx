@@ -133,7 +133,7 @@ const Login = () => {
           <div className="auth-left__brand-icon">
             <BrainIcon />
           </div>
-          <span className="auth-left__brand-name">PrepAI</span>
+          <span className="auth-left__brand-name">Vyakta AI</span>
         </Link>
 
         <div className="auth-left__content">
@@ -155,7 +155,7 @@ const Login = () => {
           </div>
         </div>
 
-        <p className="auth-left__footer">© 2025 PrepAI. All rights reserved.</p>
+        <p className="auth-left__footer">© 2025 Vyakta AI. All rights reserved.</p>
       </div>
 
       {/* ── Right: Form panel ── */}
@@ -165,7 +165,7 @@ const Login = () => {
           {/* Header */}
           <div className="auth-form-box__header animate-fade-up">
             <h1 className="auth-form-box__title">Welcome back</h1>
-            <p className="auth-form-box__subtitle">Sign in to your PrepAI account to continue.</p>
+            <p className="auth-form-box__subtitle">Sign in to your Vyakta AI account to continue.</p>
           </div>
 
           {/* Error alert */}

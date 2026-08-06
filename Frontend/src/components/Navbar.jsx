@@ -48,7 +48,7 @@ const Navbar = () => {
           <div className="navbar__logo">
             <BrainIcon />
           </div>
-          <span className="navbar__wordmark">PrepAI</span>
+          <span className="navbar__wordmark">Vyakta AI</span>
         </Link>
 
         {/* Actions */}

@@ -1,0 +1,29 @@
+services:
+
+  # ── Backend: Node.js + Express + Puppeteer ──────────────────────────────────
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: vyakta-ai-backend
+    ports:
+      - "3000:3000"
+    environment:
+      # Puppeteer: use the system Chromium installed in the Dockerfile
+      - PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+      - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+    env_file:
+      - ./Backend/.env
+    restart: unless-stopped
+
+  # ── Frontend: Vite build → Nginx serving static files + /api proxy ──────────
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    container_name: vyakta-ai-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped

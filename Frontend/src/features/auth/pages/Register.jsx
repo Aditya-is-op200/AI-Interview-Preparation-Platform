@@ -139,7 +139,7 @@ const Register = () => {
       <div className="auth-left">
         <Link to="/" className="auth-left__brand">
           <div className="auth-left__brand-icon"><BrainIcon /></div>
-          <span className="auth-left__brand-name">PrepAI</span>
+          <span className="auth-left__brand-name">Vyakta AI</span>
         </Link>
 
         <div className="auth-left__content">
@@ -161,7 +161,7 @@ const Register = () => {
           </div>
         </div>
 
-        <p className="auth-left__footer">© 2025 PrepAI. All rights reserved.</p>
+        <p className="auth-left__footer">© 2025 Vyakta AI. All rights reserved.</p>
       </div>
 
       {/* Right form panel */}
