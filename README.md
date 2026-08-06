@@ -1,9 +1,6 @@
 <div align="center">
 
-<h1>
-  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Brain.png" alt="Brain" width="40" height="40" />
-  &nbsp;Vyakta AI
-</h1>
+# 🧠 Vyakta AI
 
 **AI-powered interview intelligence platform — from resume to interview-ready in minutes.**
 
@@ -25,13 +22,15 @@
 [![SCSS](https://img.shields.io/badge/Sass-SCSS-CC6699?style=for-the-badge&logo=sass&logoColor=white)](https://sass-lang.com/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
+</div>
+
 ---
 
-![Interview X-Ray — Hero Screenshot](assets/08-interview-xray-hero.png)
+## 🎬 Demo Video
 
-*Interview X-Ray — AI Hiring Manager simulation that finds blind spots in your resume with evidence and probability scoring*
+https://github.com/Aditya-is-op200/AI-Interview-Preparation-Platform/releases/download/v1.0.0/AI-Interview-Preparation-Platform-DEMO_Video.mp4
 
-</div>
+> *Can't see the video? [Download it from the v1.0.0 Release](https://github.com/Aditya-is-op200/AI-Interview-Preparation-Platform/releases/tag/v1.0.0).*
 
 ---
 
@@ -42,16 +41,6 @@
 The platform's flagship feature — **Interview X-Ray** — simulates a Senior Engineering Hiring Manager reviewing your resume, identifying every blind spot with direct evidence quotes and follow-up probability scores.
 
 > **Try it live** → [ai-interview-preparation-platform-eosin.vercel.app](https://ai-interview-preparation-platform-eosin.vercel.app)
-
----
-
-## 🎬 Demo Video
-
-> **Full platform walkthrough** — login through Interview X-Ray results in under 3 minutes.
-
-https://github.com/Aditya-is-op200/AI-Interview-Preparation-Platform/releases/download/v1.0.0/AI-Interview-Preparation-Platform-DEMO_Video.mp4
-
-> *Can't see the video? [Download it directly from the v1.0.0 Release](https://github.com/Aditya-is-op200/AI-Interview-Preparation-Platform/releases/tag/v1.0.0).*
 
 ---
 
@@ -477,10 +466,10 @@ git push origin feature/new-feature
 
 **Aditya Singh**
 
-[![GitHub](https://img.shields.io/badge/GitHub-@Aditya--is--op200-181717?style=for-the-badge&logo=github)](https://github.com/Aditya-is-op200)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Aditya_Singh-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/aditya-singh-2512662ba/)
-[![LeetCode](https://img.shields.io/badge/LeetCode-@Aditya__Singh__Lko-FFA116?style=for-the-badge&logo=leetcode&logoColor=black)](https://leetcode.com/u/Aditya_Singh_Lko/)
-[![Email](https://img.shields.io/badge/Email-adityaanandsingh2004codes@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:adityaanandsingh2004codes@gmail.com)
+- GitHub: [@Aditya-is-op200](https://github.com/Aditya-is-op200)
+- LinkedIn: [Aditya Singh](https://www.linkedin.com/in/aditya-singh-2512662ba/)
+- LeetCode: [@Aditya_Singh_Lko](https://leetcode.com/u/Aditya_Singh_Lko/)
+- Email: [adityaanandsingh2004codes@gmail.com](mailto:adityaanandsingh2004codes@gmail.com)
 
 ---
 
