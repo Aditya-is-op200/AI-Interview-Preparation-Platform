@@ -49,9 +49,9 @@ The platform's flagship feature — **Interview X-Ray** — simulates a Senior E
 
 > **Full platform walkthrough** — login through Interview X-Ray results in under 3 minutes.
 
-https://github.com/Aditya-is-op200/AI-Interview-Preparation-Platform/assets/AI-Interview-Preparation-Platform-DEMO_Video.mp4
+https://github.com/Aditya-is-op200/AI-Interview-Preparation-Platform/releases/download/v1.0.0/AI-Interview-Preparation-Platform-DEMO_Video.mp4
 
-> *Note: If the video above does not render, [download it directly from the repository](assets/AI-Interview-Preparation-Platform-DEMO_Video.mp4).*
+> *Can't see the video? [Download it directly from the v1.0.0 Release](https://github.com/Aditya-is-op200/AI-Interview-Preparation-Platform/releases/tag/v1.0.0).*
 
 ---
 
