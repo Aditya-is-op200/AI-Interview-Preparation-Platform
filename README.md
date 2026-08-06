@@ -28,9 +28,9 @@
 
 ## 🎬 Demo Video
 
-https://github.com/Aditya-is-op200/AI-Interview-Preparation-Platform/releases/download/v1.0.0/AI-Interview-Preparation-Platform-DEMO_Video.mp4
-
-> *Can't see the video? [Download it from the v1.0.0 Release](https://github.com/Aditya-is-op200/AI-Interview-Preparation-Platform/releases/tag/v1.0.0).*
+<video controls width="100%">
+  <source src="./assets/demo.mp4" type="video/mp4">
+</video>
 
 ---
 
