@@ -1,3 +1,6 @@
+
+
+
 <div align="center">
 
 # 🚀 Vyakta AI
@@ -28,9 +31,7 @@
 
 ## 🎬 Demo Video
 
-<video controls width="100%">
-  <source src="./assets/demo.mp4" type="video/mp4">
-</video>
+https://github.com/user-attachments/assets/86416e8b-a79c-478c-a3d6-2d0ed9eb92ba
 
 ---
 
